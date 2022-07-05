@@ -1,0 +1,23 @@
+import copy
+
+
+class Solution(object):
+    def combine(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        result = []
+        def tree(a, list):
+            if len(list) == k:
+                result.append(copy.deepcopy(list))
+                return
+
+            for i in range(a, n+1):
+                list.append(i)
+                tree(i+1, list)
+                list.pop()
+
+        tree(1,[])
+        return result
