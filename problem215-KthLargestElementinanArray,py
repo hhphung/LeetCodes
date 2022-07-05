@@ -1,0 +1,21 @@
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        result = 0
+
+        index =0
+        while k > 0:
+            m = -10000
+            for i in range(len(nums)):
+                if m < nums[i]:
+                    m = nums[i]
+                    index = i
+            nums.pop(index)
+            k-=1
+
+        return m
+        
