@@ -1,0 +1,31 @@
+class Solution(object):
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        path = set()
+        row = len(board)
+        col = len(board[0])
+
+        def search( r, c, length):
+            if len(word) == length:
+                return True
+            if (r<0 or c < 0 or r>=row or c >= col or word[length] != board[r][c] or (r,c) in path):
+                return False
+
+
+            path.add((r,c))
+            result = search( r+1, c,length+1) or \
+                     search( r-1, c, length+1) or \
+                     search( r, c+1, length+1) or \
+                     search( r, c-1, length+1)
+            path.remove((r,c))
+            return result
+
+        for r in range(row):
+            for c in  range(col):
+                    if search(r, c, 0):
+                        return True
+        return False
