@@ -1,0 +1,31 @@
+import java.util.*;
+
+class Solution {
+    public static boolean canBeIncreasing(int[] nums) {
+        int[] reMove = new int[nums.length-1];
+        int index =0;
+        for(int i = 0; i < nums.length; i ++){
+            for(int j = 0; j < nums.length; j ++ ){
+                if(i!=j){
+                    reMove[index] = nums[j];
+                    index++;
+                }
+            }
+            boolean found = true;
+            for(int a = 0; a< reMove.length-1; a ++){
+                if(reMove[a] >= reMove[a+1]){
+                    found = false;
+                    break;
+                }
+            }
+            if (found){
+                return found;
+            }
+            found = true;
+            index = 0;
+        }
+    return false;
+}
+
+
+}
