@@ -1,0 +1,25 @@
+import java.sql.Array;
+import java.util.*;
+
+class Solution {
+    public static int deleteAndEarn(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return 0;
+
+        // bucket sort
+        final int N = 10001;
+        int[] counts = new int[N];
+        for (int num: nums) {
+            counts[num]++;
+        }
+
+        int[] takes = new int[N], skips = new int[N];
+        for (int i = 1; i < N; i++) {
+            takes[i] = skips[i - 1] + counts[i] * i;
+            skips[i] = Math.max(takes[i - 1], skips[i - 1]);
+        }
+
+        return Math.max(takes[N - 1], skips[N - 1]);
+    }
+
+}
